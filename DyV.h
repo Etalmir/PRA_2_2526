@@ -75,4 +75,27 @@ int binarySearchRecursiveINV(const std::vector<T>& arr, const T& e, int izq, int
     }
 }
 
+template <typename T>
+T Particion(std::vector<T>& arr, int ini, int fin) {
+    T pivote = arr[fin];
+    int i = ini - 1;
+    for (int j = ini; j < fin; j++) {
+        if (arr[j] <= pivote) {
+            i++;
+            std::swap(arr[i], arr[j]);
+        }
+    }
+    std::swap(arr[i + 1], arr[fin]);
+    return i + 1;
+}
+
+template <typename T>
+void quickSort(std::vector<T>& arr, int ini, int fin) {
+    if (ini < fin) {
+        T pivote = Particion(arr, ini, fin);
+        quickSort(arr, ini, pivote - 1);
+        quickSort(arr, pivote + 1, fin);
+    }
+}
+
 #endif
